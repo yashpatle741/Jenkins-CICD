@@ -1,23 +1,20 @@
 node{
     def AppDir = '/var/www/nextjs-app'
-    Stage('clean workspace'){
+    stage('clean workspace'){
         echo 'cleaning jenkins workspace'
         deleteDir()
     }
-    Stage('Clone repo'){
+    stage('Clone repo'){
         echo 'cloning the repo'
-        git(branch: 'main'
-            url: 'https://github.com/yashpatle741/Jenkins-CICD'
-            
-            )
+       git branch: 'main', url: 'https://github.com/yashpatle741/Jenkins-CICD'
     }
-    Stage('Deploy to EC2'){
+    stage('Deploy to EC2'){
         echo 'deploying to EC2'
         sh"""
           sudo mkdir -p ${AppDir}
-          sudo chown -R Jenkins:Jenkins ${AppDir}
+          sudo chown -R jenkins:jenkins ${AppDir}
 
-          rsync -av --delete --exclude = '.git' --exclude = 'node_modules' ./${AppDir}
+          rsync -av --delete --exclude= '.git' --exclude= 'node_modules' ./ ${AppDir}
           cd ${AppDir}
           sudo npm install
           sudo npm run build
