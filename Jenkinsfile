@@ -18,8 +18,7 @@ node {
 
           cd ${AppDir}
           npm install
-          npm run build
-
+         NODE_OPTIONS="--max-old-space-size=512" npm run build
           sudo fuser -k 3000/tcp || true
           nohup npm run start > app.log 2>&1 &
         """
