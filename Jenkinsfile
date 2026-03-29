@@ -26,7 +26,6 @@ node {
           sudo fuser -k 3000/tcp || true
 
           nohup npm run start > app.log 2>&1 &
-          disown
         """
     }
 }
