@@ -17,10 +17,16 @@ node {
           rsync -av --delete --exclude='.git' --exclude='node_modules' ./ ${AppDir}
 
           cd ${AppDir}
-          npm install
-         NODE_OPTIONS="--max-old-space-size=512" npm run build
+
+          sudo npm install
+
+          export NODE_OPTIONS="--max-old-space-size=512"
+          npm run build
+
           sudo fuser -k 3000/tcp || true
+
           nohup npm run start > app.log 2>&1 &
+          disown
         """
     }
 }
