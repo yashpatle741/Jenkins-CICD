@@ -7,7 +7,7 @@ node{
     Stage('Clone repo'){
         echo 'cloning the repo'
         git(branch: 'main'
-            url: 'https://github.com/yashpatle741/Jenkins-CICD.git'
+            url: 'https://github.com/yashpatle741/Jenkins-CICD'
             
             )
     }
